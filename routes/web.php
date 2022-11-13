@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('admin', 'AdminController@index')->name('admin');
     Route::post('activateUser{id}', 'AdminController@activateUser')->name('activateUser');
     Route::post('deactivateUser{id}', 'AdminController@deactivateUser')->name('deactivateUser');

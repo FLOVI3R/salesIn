@@ -12,7 +12,8 @@
             <thead>
                 <tr>
                     <th style="width: 10px">|</th>
-                    <th style="width: 300px">NOMBRE</th>
+                    <th style="width: 200px">NOMBRE</th>
+                    <th style="width: 200px">APELLIDOS</th>
                     <th style="width: 500px">EMAIL</th>
                     <th style="width: 100px"></th>
                     <th></th>
@@ -24,6 +25,7 @@
                 <tr>
                     <th scope="row">{{ $user->id }}</th>
                     <td>{{ $user->name }}</td>
+                    <td>{{ $user->surname }}</td>
                     <td>{{ $user->email }}</td>
                     <td>
                         @if($user->actived === 0)
