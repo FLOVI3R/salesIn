@@ -1,28 +1,28 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'CREAR NOTICIA')
 
 @section('content_header')
-    <h1>EDITAR USUARIO</h1>
+    <h1>CREAR NOTICIA</h1>
 @stop
 
 @section('content')
-    <form action="{{ route('editUser', $user->id) }}" method="POST">
+    <form action="{{ route('addArticle') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
-            <h2>Nombre: </h1>
-            <input type="text" name="name" value="{{ $user->name }}" class="form-control">
+            <h2>Título: </h1>
+            <input type="text" name="title" class="form-control" required>
         </div>
         <div class="form-group">
-            <h2>Apellidos: </h1>
-            <input type="text" name="surname" value="{{ $user->surname }}" class="form-control">
+            <h2>Descripción: </h1>
+            <input type="text" name="description" class="form-control" required>
         </div>
         <div class="form-group">
-            <h2>Email: </h1>
-            <input type="text" name="email" value="{{ $user->email }}" class="form-control">
+            <h2>Imagen: </h1>
+            <input type="text" name="image" class="form-control" required>
         </div>
         <div>
-            <button type="submit" class="btn-outline-primary btn-sm show_confirm">Editar</button>
+            <button type="submit" class="btn-outline-primary btn-sm show_confirm">Crear Noticia</button>
         </div>
     </form>
     
@@ -41,8 +41,8 @@
           var name = $(this).data("name");
           event.preventDefault();
           swal({
-              title: `Confirmación para editar usuario`,
-              text: "Va a editar un usuario de la base de datos. ¿Está seguro de querer editar este usuario?",
+              title: `Confirmación para crear noticia`,
+              text: "Va a crear una noticia  y añadirla a la base de datos. ¿Está seguro de querer editar esta noticia?",
               icon: "warning",
               buttons: true,
               dangerMode: true,

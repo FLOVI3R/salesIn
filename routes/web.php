@@ -16,14 +16,21 @@ Route::get('/', function () {
 });
 
 Auth::routes(['verify' => true]);
+Route::post('logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
 
-Route::middleware(['auth', 'verified', 'admin'])->group(function () {
+Route::middleware(['auth', 'verified', 'active', 'admin'])->group(function () {
     Route::get('admin', 'AdminController@index')->name('admin');
     Route::post('activateUser{id}', 'AdminController@activateUser')->name('activateUser');
     Route::post('deactivateUser{id}', 'AdminController@deactivateUser')->name('deactivateUser');
     Route::post('deleteUser{id}', 'AdminController@deleteUser')->name('deleteUser');
-    Route::post('updateUser{id}', 'AdminController@updateUser')->name('updateUser');
+    Route::get('updateUser{id}', 'AdminController@updateUser')->name('updateUser');
     Route::post('editUser{id}', 'AdminController@editUser')->name('editUser');
+    Route::get('articles', 'AdminController@articles')->name('articles');
+    Route::get('createArticle', 'AdminController@createArticle')->name('createArticle');
+    Route::post('addArticle', 'AdminController@addArticle')->name('addArticle');
+    Route::get('updateArticle{id}', 'AdminController@updateArticle')->name('updateArticle');
+    Route::post('editArticle{id}', 'AdminController@editArticle')->name('editArticle');
+    Route::post('deleteArticle{id}', 'AdminController@deleteArticle')->name('deleteArticle');
 });
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('auth', 'verified');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('auth', 'verified', 'deleted');

@@ -41,7 +41,7 @@
                         @endif 
                     </td>
                     <td>
-                    <form action="{{ route('updateUser', $user->id) }}" method="POST">
+                    <form action="{{ route('updateUser', $user->id) }}" method="GET">
                             @csrf
                             <button type="submit" class="btn btn-block btn-outline-secondary btn-sm">Editar</button>
                         </form>
@@ -49,7 +49,7 @@
                     <td>
                         <form action="{{ route('deleteUser', $user->id) }}" method="POST">
                             @csrf
-                            <button type="submit" class="btn btn-block btn-outline-danger btn-sm" onclick="confirm('¿Está seguro que querer eliminar este usuario de la base de datos?') || event.stopImmediatePropagation()" wire:click="deleteUser">Eliminar</button>
+                            <button type="submit" class="btn btn-block btn-outline-danger btn-sm show_confirm">Eliminar</button>
                         </form>
                     </td>
                 </tr>
@@ -66,5 +66,26 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+<script type="text/javascript">
+ 
+     $('.show_confirm').click(function(event) {
+          var form =  $(this).closest("form");
+          var name = $(this).data("name");
+          event.preventDefault();
+          swal({
+              title: `Confirmación para eliminar usuario`,
+              text: "Va a eliminar un usuario de la base de datos, no se podrá recuperar. ¿Está seguro de querer eliminar este usuario?",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              form.submit();
+            }
+          });
+      });
+  
+</script>
 @stop
