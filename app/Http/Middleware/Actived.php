@@ -3,11 +3,10 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\User;
 use Auth;
 use Illuminate\Http\Request;
 
-class isAdmin
+class Actived
 {
     /**
      * Handle an incoming request.
@@ -18,10 +17,10 @@ class isAdmin
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user() &&  Auth::user()->type == 'admin') {
+        if (Auth::user() &&  Auth::user()->actived == 1) {
             return $next($request);
         }
 
-        return redirect('/');
+        return redirect('/home');
     }
 }
